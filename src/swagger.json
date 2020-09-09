@@ -1,0 +1,49 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API com NODEJS typeScript",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "tags": [{
+    "name": "Users",
+    "description": "Endpoints referente ao dominio de USERS"
+  }],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/getUSer": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retorna todos os 'Users' do banco de dados",
+        "responses": {
+          "200": {
+              "description": "Listagem de Usuarios",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/users"
+                  }
+                }
+              }
+            },
+            "5XX": {
+              "description": "Erro inesperado"
+            }
+          }
+        }
+        },
+        "definitions": {
+
+        }
+      }
+    }

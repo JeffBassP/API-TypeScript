@@ -3,7 +3,10 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 import { OK } from 'http-status-codes';
-import routes from './api/v1/domains/User';
+import routes from '.';
+import swaggerConfig from './middlewares/swagger';
+import errorHandler from './middlewares/errorHandler';
+
 class App {
   constructor(PORT: Number) {
     const app = express();
@@ -12,6 +15,9 @@ class App {
     app.use(compression());
     app.use(helmet());
     app.use(routes);
+    app.use(...swaggerConfig);
+    app.use(errorHandler);
+
     app.get('/', (req: express.Request, res: express.Response) => {
       res.status(OK).json({
         name: 'it s alive',

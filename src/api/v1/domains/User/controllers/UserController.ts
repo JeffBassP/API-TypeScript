@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
+import errors from './../../../../../common/errors/error-helper';
 
 let database: any;
 let userSchema: any;
-
+//mongodb+srv://usuario:jeferson@arbyte.obhjq.mongodb.net/devlopment?retryWrites=true&w=majority
 class UserController {
 
   async connectDatabase() {
-    database = database || mongoose.connect('mongodb+srv://usuario:jeferson@arbyte.obhjq.mongodb.net/devlopment?retryWrites=true&w=majority', {
+    database = database || mongoose.connect('', {
       useNewUrlParses: true,
       useUnifiedTopology: true
     });
@@ -29,17 +30,21 @@ class UserController {
   };
 
   async getUSer() {
-    const database = await this.connectDatabase();
+    try {
+      const database = await this.connectDatabase();
     
-    await this.createUserSchema(database);
+      await this.createUserSchema(database);
    
-    const {
-      User
-    } = database.models;
-    
-    const users = User.find();
-    
-    return users;
+      const {
+        User
+      } = database.models;
+      
+      const users = User.find();
+      
+      return users;
+    } catch{
+      throw errors.generic.notFound();
+    }
   };
 
   async createUser({ name }: { name: String }) {
