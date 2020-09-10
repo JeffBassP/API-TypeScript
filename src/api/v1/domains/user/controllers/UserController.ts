@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-import errors from './../../../../../common/errors/error-helper';
+import errors from '../../../../../common/errors/error-helper';
 
 let database: any;
 let userSchema: any;
@@ -7,7 +7,7 @@ let userSchema: any;
 class UserController {
 
   async connectDatabase() {
-    database = database || mongoose.connect('', {
+    database = database || mongoose.connect('mongodb+srv://usuario:jeferson@arbyte.obhjq.mongodb.net/devlopment?retryWrites=true&w=majority', {
       useNewUrlParses: true,
       useUnifiedTopology: true
     });
