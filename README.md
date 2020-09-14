@@ -1,11 +1,12 @@
-### Criando uma API com TypeScript
+# Criando uma API com TypeScript
 
   ## Middlewares utilizados 
-  * compression
-  * Express
-  * Cors 
-  * Helmet 
-  * http-status-code 
+  1. compression
+  2. Express
+  3. Cors 
+  4. Helmet 
+  5. http-status-code 
+  6. Swagger
 
   ## Para utilizar a API:
     - execute `npm install`
@@ -18,5 +19,6 @@
     - Put
     - Delete
 
-  *** Futuramente será implementado o Swagger, se possivel ***
-
+  ## Documentação com Swagger
+    - Toda a Documentação foi desenvolvida com a library do **Swagger**
+    - Implementamos as rotinas de CRUD para testes da API.
