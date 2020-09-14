@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
+
 import errors from '../../../../../common/errors/error-helper';
 
 let database: any;
 let userSchema: any;
-//mongodb+srv://usuario:jeferson@arbyte.obhjq.mongodb.net/devlopment?retryWrites=true&w=majority
+const mongo = process.env.MONGO;
+
 class UserController {
 
   async connectDatabase() {
-    database = database || mongoose.connect('mongodb+srv://usuario:jeferson@arbyte.obhjq.mongodb.net/devlopment?retryWrites=true&w=majority', {
+    database = database || mongoose.connect(mongo, {
       useNewUrlParses: true,
       useUnifiedTopology: true
     });

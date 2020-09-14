@@ -7,6 +7,7 @@
   4. Helmet 
   5. http-status-code 
   6. Swagger
+  7. Jest
 
   ## Para utilizar a API:
     - execute `npm install`
@@ -22,3 +23,9 @@
   ## Documentação com Swagger
     - Toda a Documentação foi desenvolvida com a library do **Swagger**
     - Implementamos as rotinas de CRUD para testes da API.
+  
+  ## Testes funcionais
+
+    - Realizamos os testes funcionais do sistema.
+    
+    *Pretendemos adicionar testes unitarios em breve*
