@@ -16,7 +16,7 @@ routes.post(`${prefix}/`, (
   req: Request,
   res: Response,
   next: Function
-) => controller.createUSer({ ...req.body })
+) => controller.createUser({ ...req.body })
   .then(result => res.send(result))
   .catch(error => next(error))
 );

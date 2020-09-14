@@ -19,7 +19,7 @@
     "application/json"
   ],
   "paths": {
-    "/getUSer": {
+    "/users": {
       "get": {
         "tags": [
           "Users"
@@ -31,7 +31,7 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/users"
+                    "$ref": "#/definitions/Users"
                   }
                 }
               }
@@ -40,10 +40,239 @@
               "description": "Erro inesperado"
             }
           }
-        }
         },
-        "definitions": {
-
+      "post": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Insere um novo usuario no banco de dados",
+          "requestBody":{
+            "description": "Propriedades do usuario",
+            "required": true,
+            "content": {
+              "application/json":{
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200":{
+              "description": "OK"
+            },
+            "5XX":{
+              "description": "Erro inesperado"
+            }
+          }
+        }
+      },
+      "/users/{id}": {
+        "put":{
+          "summary": "Altera um valor do banco de dados correspondente ao ID",
+          "tags": [
+            "Users"
+          ],
+          "requestBody": {
+            "description": "Propriedades do usuario",
+            "required": true,
+            "content":{
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "parameters": [{
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID do usuario que iremos atualizar",
+            "schema":{
+              "$ref": "#/definitions/id"
+            }
+          }],
+          "responses":{
+            "200":{
+              "description": "OK",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "$ref":"#/definitions/UpdateResponse"
+                  }
+                }
+              }
+            },
+            "5XX": {
+              "description":"Erro inesperado"
+            }
+          }
+        },
+        "delete":{
+          "summary": "Delete o user correspondente ao ID",
+          "tags":[
+            "Users"
+          ],
+          "parameters":[{
+            "in":"path",
+            "name":"id",
+            "required":true,
+            "description": "ID do usuario que iremos deletar",
+            "schema":{
+              "$ref":"#/definitions/id"
+            }
+          }],
+          "responses":{
+            "200":{
+              "description": "OK",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "$ref": "#/definitions/DeleteResponse"
+                  }
+                }
+              }
+            },
+            "5XX":{
+              "description":"Erro inesperado"
+            }
+          }
         }
       }
-    }
+    },
+   "definitions": {
+          "Users": {
+            "type": "array",
+            "items": {
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "_v": "number"
+        }
+      }
+          },
+          "User":{
+            "type": "object",
+            "properties": {
+              "name": {
+                "type":"string"
+              }
+            }
+          },
+          "id":{
+            "properties": {
+              "_id": {
+                "type": "string"
+              }
+            }
+          },
+          "UpdateResponse":{
+            "type": "object",
+            "properties":{
+              "n":{
+                "type": "number"
+              },
+              "nModified":{
+                "type": "number"
+              },
+              "opTime": {
+                "type":"object",
+                "properties":{
+                  "ts":{
+                    "type":"string"
+                  },
+                  "t":{
+                    "type": "number"
+                  }
+                }
+              },
+              "electionId":{
+                "type": "string"
+              },
+              "ok":{
+                "type": "number"
+              },
+              "$clusterTime":{
+                "type":"object",
+                "properties":{
+                  "clusterTime":{
+                    "type":"string"
+                  },
+                  "signature":{
+                    "type":"object",
+                    "properties":{
+                      "hash": {
+                        "type":"string"
+                      },
+                      "keyId":{
+                        "type":"string"
+                      }
+                    }
+                  }
+                }
+              },
+              "operationTime": {
+                "type":"string"
+              }
+            }
+          },
+          "DeleteResponse":{
+            "type":"object",
+            "properties":{
+              "n":{
+                "type":"number"
+              },
+              "opTime":{
+                "type":"object",
+                "properties":{
+                  "ts":{
+                    "type":"string"
+                  },
+                  "t":{
+                    "type": "number"
+                  }
+                }
+              },
+              "electionId":{
+                "type":"string"
+              },
+              "ok":{
+                "type": "number"
+              },
+              "$clusterTime":{
+                "type":"object",
+                "properties":{
+                  "clusterTime":{
+                    "type":"string"
+                  },
+                  "signature":{
+                    "type":"object",
+                    "properties":{
+                      "hash":{
+                        "type":"string"
+                      },
+                      "keyId":{
+                        "type":"string"
+                      }
+                    }
+                  }
+                }
+              },
+              "operationTime":{
+                "type":"string"
+              },
+              "deleteCount":{
+                "type":"number"
+              }
+            }
+          }
+  }
+}
